@@ -3,6 +3,7 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Run (runInTerm, spawnPipe)
 
 import XMonad.Actions.WindowGo (title, raiseMaybe, runOrRaise)
+import XMonad.Actions.Volume
 
 import XMonad.Hooks.DynamicHooks
 import XMonad.Hooks.DynamicLog
@@ -37,9 +38,11 @@ myLayout = avoidStruts . smartBorders
       ratio = 1/2
       delta = 3/100
 
-imLayout = IM (1%5)
-           (Or (Title "Buddy List")
-           (And (Resource "main") (ClassName "psi")))
+imLayout = withIM (1/7) (Role "buddy_list") Grid
+-- imLayout = withIM (1%5) (Title "Pino")
+--           (Or (Title "Buddy List")
+--           (Or (Title "Pino")
+--           (And (Resource "main") (ClassName "psi")))
 
 myManageHook = composeAll . concat $
     [ [ manageHook defaultConfig
@@ -48,6 +51,7 @@ myManageHook = composeAll . concat $
       ]
     , [ className =? c --> doShift "2" | c <- myBrowsers ]
     , [ className =? "java-lang-Thread" --> doShift "3"
+      , className =? "Pino" --> doShift "1"
       , className =? "Pidgin" --> doShift "1"
       , className =? "Skype" --> doShift "1"
       , className =? "Banshee" --> doShift "9"
@@ -59,11 +63,13 @@ myManageHook = composeAll . concat $
 myKeys = [ ("M-f", sendMessage $ Toggle FULL)
          , ("M-p", spawn "dmenu_run")
          , ("M-S-z", spawn "xscreensaver-command --lock")
+         , ("<XF86AudioLowerVolume>", spawn "amixer -q set Master 4%- unmute")
+         , ("<XF86AudioRaiseVolume>", spawn "amixer -q set Master 4%+ unmute")
          ] 
 
 main = do
     xmproc <- spawnPipe "/home/skuli/.cabal/bin/xmobar /home/skuli/.xmonad/xmobarrc"
-    xmonad $ defaultConfig
+    xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
          { modMask = mod4Mask
          , terminal = "gnome-terminal"
          , manageHook = myManageHook
@@ -71,5 +77,6 @@ main = do
          , logHook = takeTopFocus >> dynamicLogWithPP xmobarPP
              { ppOutput = hPutStrLn xmproc
              , ppTitle = xmobarColor "green" "" . shorten 50
+             , ppUrgent = xmobarColor "red" "" . wrap " !*! " " !*! "
              }
          } `additionalKeysP` myKeys
