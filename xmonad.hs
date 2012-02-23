@@ -68,7 +68,7 @@ myKeys = [ ("M-f", sendMessage $ Toggle FULL)
          ] 
 
 main = do
-    xmproc <- spawnPipe "/home/skuli/.cabal/bin/xmobar /home/skuli/.xmonad/xmobarrc"
+    xmproc <- spawnPipe "~/.cabal/bin/xmobar ~/.xmonad/xmobarrc"
     xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
          { modMask = mod4Mask
          , terminal = "gnome-terminal"
