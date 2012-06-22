@@ -29,6 +29,7 @@ import Data.List
 myLayout = avoidStruts . smartBorders
     $ mkToggle(FULL??EOT)
     $ onWorkspace "1" (imLayout)
+--    $ onWorkspace "1" ( withIM (1/7) (Role "buddy_list") (Grid ||| Full ||| tiled ||| Mirror tiled))
     $ onWorkspace "2" ( Full ||| tiled ||| Mirror tiled )
     $ onWorkspace "3" ( Full ||| tiled ||| Mirror tiled )
     $ ( Grid ||| Full ||| tiled ||| Mirror tiled )
@@ -38,7 +39,7 @@ myLayout = avoidStruts . smartBorders
       ratio = 1/2
       delta = 3/100
 
-imLayout = withIM (1/7) (Role "buddy_list") Grid
+imLayout = withIM (1/6) (Role "buddy_list") Grid
 -- imLayout = withIM (1%5) (Title "Pino")
 --           (Or (Title "Buddy List")
 --           (Or (Title "Pino")
@@ -61,7 +62,9 @@ myManageHook = composeAll . concat $
     where myBrowsers = ["Opera", "Google-chrome", "chromium-browser", "chromium-dev"] 
  
 myKeys = [ ("M-f", sendMessage $ Toggle FULL)
-         , ("M-p", spawn "dmenu_run")
+         , ("M-p", spawn "dmenu_run -i")
+         , ("M-a", spawn "screenshot")
+         , ("M-S-a", spawn "select-screenshot")
          , ("M-S-z", spawn "xscreensaver-command --lock")
          , ("<XF86AudioLowerVolume>", spawn "amixer -q set Master 4%- unmute")
          , ("<XF86AudioRaiseVolume>", spawn "amixer -q set Master 4%+ unmute")
