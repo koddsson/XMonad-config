@@ -3,12 +3,13 @@ Config {
        commands = [
                 Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red"] 10,
                 Run Memory ["-t","Mem: <usedratio>%"] 10,
-                Run Swap [] 10,
                 Run Date "%a %b %_d %H:%M" "date" 10,
                 Run StdinReader,
-                Run Com "vedur" ["--fetch", "%weather", "' '", "%temperature", "'°C, '", "%wind", "' m/s '", "%winddirection"] "vedur" 600
+                Run Com "dropbox" ["status"] "" 10,
+                Run Com "battery" [] "" 1,
+                Run Com "volume" [] "" 1
                 ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %multicpu% | %memory% * %swap%    <fc=#ee9a00>%date%</fc>"
+       , template = "%StdinReader% }{ %dropbox% | %multicpu% | %memory% | %battery% | %volume% | <fc=#ee9a00>%date%</fc>"
        }

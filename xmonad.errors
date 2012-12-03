@@ -1,0 +1,4 @@
+
+xmonad.hs:23:8:
+    Could not find module `XMonad.Layout.MultiToggle.Instances'
+    Use -v to see a list of the files searched for.

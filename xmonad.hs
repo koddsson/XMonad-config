@@ -59,19 +59,19 @@ myManageHook = composeAll . concat $
       , className =? "Tomboy" --> doShift "8"
       ]
     ]
-    where myBrowsers = ["Opera", "Google-chrome", "chromium-browser", "chromium-dev"] 
+    where myBrowsers = ["Opera", "Google-chrome", "chromium-browser", "chromium-dev", "chromium"] 
  
 myKeys = [ ("M-f", sendMessage $ Toggle FULL)
          , ("M-p", spawn "dmenu_run -i")
          , ("M-a", spawn "screenshot")
          , ("M-S-a", spawn "select-screenshot")
-         , ("M-S-z", spawn "xscreensaver-command --lock")
          , ("<XF86AudioLowerVolume>", spawn "amixer -q set Master 4%- unmute")
          , ("<XF86AudioRaiseVolume>", spawn "amixer -q set Master 4%+ unmute")
+	 , ("<XF86AudioMute>", spawn "amixer -q set Master toggle")
          ] 
 
 main = do
-    xmproc <- spawnPipe "~/.cabal/bin/xmobar ~/.xmonad/xmobarrc"
+    xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobarrc"
     xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
          { modMask = mod4Mask
          , terminal = "gnome-terminal"
