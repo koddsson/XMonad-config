@@ -12,4 +12,5 @@ TODO
 + Create a custom Exec script instead of running directly XMonad
   + Add custom startup programs there (mainly xscreensaver)
 + Add weather and network info to XMobar
-+ Add Icons instead of labels in xmobar
++ -Add icons instead of labels in xmobar-
+  + Apparently xmobar does not support icons, but there are other solutions such as [dzen](https://github.com/robm/dzen)
