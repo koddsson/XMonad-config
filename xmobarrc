@@ -1,5 +1,5 @@
 Config {
-       font = "xft:inconsolata:pixelsize=13",
+       font = "xft:inconsolata:pixelsize=10",
        commands = [
                 Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red"] 10,
                 Run Memory ["-t","Mem: <usedratio>%"] 10,
