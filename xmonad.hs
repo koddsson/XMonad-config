@@ -3,7 +3,6 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Run (runInTerm, spawnPipe)
 
 import XMonad.Actions.WindowGo (title, raiseMaybe, runOrRaise)
-import XMonad.Actions.Volume
 
 import XMonad.Hooks.DynamicHooks
 import XMonad.Hooks.DynamicLog
@@ -39,7 +38,7 @@ myLayout = avoidStruts . smartBorders
       ratio = 1/2
       delta = 3/100
 
-imLayout = withIM (1/6) (Role "buddy_list") Grid
+imLayout = withIM (1/6) (Role "contact_list") Grid
 -- imLayout = withIM (1%5) (Title "Pino")
 --           (Or (Title "Buddy List")
 --           (Or (Title "Pino")
