@@ -73,7 +73,7 @@ main = do
     xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobarrc"
     xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
          { modMask = mod4Mask
-         , terminal = "gnome-terminal"
+         , terminal = "xterm"
          , manageHook = myManageHook
          , layoutHook = myLayout
          , logHook = takeTopFocus >> dynamicLogWithPP xmobarPP

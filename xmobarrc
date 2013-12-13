@@ -4,12 +4,14 @@ Config {
                 Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red"] 10,
                 Run Memory ["-t","Mem: <usedratio>%"] 10,
                 Run Date "%a %b %_d %H:%M" "date" 10,
+                Run DateZone "%a %b %_d %H:%M" "en_US.UTF-8" "Atlantic/Reykjavik" "rvkTime" 10,
+                Run DateZone "%a %b %_d %H:%M" "en_US.UTF-8" "Pacific/Fiji" "fjTime" 10,
                 Run StdinReader,
                 Run Com "dropbox" ["status"] "" 10,
-                Run Com "battery" [] "" 1,
+                Run Com "battery" [""] "battery" 1,
                 Run Com "volume" [] "" 1
                 ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %dropbox% | %multicpu% | %memory% | %battery% | %volume% | <fc=#ee9a00>%date%</fc>"
+       , template = "%StdinReader% }{ %dropbox% | %multicpu% | %memory% | %battery% | %volume% | US: <fc=#ee9a00>%date%</fc> | IS: <fc=#ee9a00>%rvkTime%</fc> | FJ: <fc=#ee9a00>%fjTime%</fc>"
        }

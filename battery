@@ -1,14 +1,24 @@
-#!/bin/sh
-TEXT=`upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep "percentage"`
+#!/usr/bin/python
+import subprocess
+battery_info = str(subprocess.check_output('acpi'))
+battery_prec = battery_info.split(' ')[3].replace(',','')
+battery_prec = battery_prec.strip()
+print(battery_prec)
 
-n=$(echo $(echo $TEXT | grep -o "[0-9]*[0-9]*[0-9]\.....\%") | grep -o "[0-9]*[0-9]*[0-9]")
 
-if [ $n -lt 10 ]; then
-  COLOR=#FF0000
-elif [ $n -lt 30 ]; then
-  COLOR=#FFFF00
-else
-  COLOR=gray
-fi 
 
-echo $(echo $TEXT | grep -o "Charging\|Discharging\|Full") "<fc="$COLOR">"$n"%</fc>"
+# BASH SCRIPT FOR UBUNTU
+
+#TEXT=`upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep "percentage"`
+#
+#n=$(echo $(echo $TEXT | grep -o "[0-9]*[0-9]*[0-9]\.....\%") | grep -o "[0-9]*[0-9]*[0-9]")
+#
+#if [ $n -lt 10 ]; then
+#  COLOR=#FF0000
+#elif [ $n -lt 30 ]; then
+#  COLOR=#FFFF00
+#else
+#  COLOR=gray
+#fi 
+#
+#echo $(echo $TEXT | grep -o "Charging\|Discharging\|Full") "<fc="$COLOR">"$n"%</fc>"
